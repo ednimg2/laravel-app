@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('books', BookController::class);
+Route::get('blogs/inactive', [BlogController::class, 'inactiveList']);
 
+Route::resource('books', BookController::class);
+Route::resource('blogs', BlogController::class);
