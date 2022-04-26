@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 margin-tb">
+        <div class="col-lg-12 my-2">
             <div class="pull-left">
                 <h2>Books CRUD</h2>
             </div>
@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <table class="table table-bordered">
+    <table class="table table-bordered my-2">
         <tr>
             <th>Id</th>
             <th>Title</th>

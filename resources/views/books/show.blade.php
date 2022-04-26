@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 margin-tb">
+        <div class="col-lg-12 my-2">
             <div class="pull-left">
                 <h2> Show Book</h2>
             </div>
