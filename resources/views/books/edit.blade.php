@@ -23,7 +23,7 @@
         </div>
     @endif
 
-    <form action="{{ route('books.update', $book->id) }}" method="POST">
+    <form action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -40,6 +40,21 @@
                     <textarea class="form-control" style="height:150px" name="description" placeholder="Description">{{ $book->description }}</textarea>
                 </div>
             </div>
+
+
+            @if($book->file)
+                <div class="mb-3">
+                    <a href="{{asset($book->file)}}">file with assets</a>
+                    <a href="{{ route('books.download', $book->id) }}" >File</a>
+                </div>
+            @endif
+
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" id="formFile" name="file">
+            </div>
+
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>

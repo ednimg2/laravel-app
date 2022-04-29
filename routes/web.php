@@ -21,5 +21,10 @@ Route::get('/', function () {
 
 Route::get('blogs/inactive', [BlogController::class, 'inactiveList']);
 
+Route::get('books/autocomplete', \App\Http\Controllers\BookAutocompleteController::class)->name('books.autocomplete');
+Route::get('books/{book}/download', \App\Http\Controllers\BookDownloadController::class)->name('books.download');
+Route::get('books/export', \App\Http\Controllers\BookExportController::class)->name('books.export');
+Route::post('cookies', \App\Http\Controllers\CookieController::class)->name('cookies');
+
 Route::resource('books', BookController::class);
 Route::resource('blogs', BlogController::class);
