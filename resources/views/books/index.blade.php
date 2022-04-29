@@ -8,6 +8,7 @@
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('books.create') }}"> Create New Book</a>
+                <a class="btn btn-primary" href="{{ route('books.export') }}">Export list</a>
             </div>
         </div>
     </div>
@@ -17,6 +18,14 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+
+    {{ \Illuminate\Support\Facades\Cookie::get('pma') }}
+
+    <form action="{{ route('books.index') }}" method="get">
+        <label for="search">Search</label>
+        <input id="search" type="text" name="search" placeholder="Insert book title" value="{{ request('search') }}">
+        <input type="submit">
+    </form>
 
     <table class="table table-bordered my-2">
         <tr>
@@ -34,6 +43,11 @@
                     <form action="{{ route('books.destroy', $book->id) }}" method="POST">
                         <a class="btn btn-info" href="{{ route('books.show', $book->id) }}">Show</a>
                         <a class="btn btn-primary" href="{{ route('books.edit', $book->id) }}">Edit</a>
+
+                        @if($book->file)
+                            <a class="btn btn-success" target="_blank" href="{{ route('books.download', $book->id) }}">Download</a>
+                        @endif
+
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -43,6 +57,20 @@
         @endforeach
     </table>
 
-    {!! $books->links() !!}
+    {!! $books->withQueryString()->links() !!}
+
+    <script>
+        $( function() {
+
+            $("#search").autocomplete({
+                source: "{{ route('books.autocomplete') }}",
+                minLength: 2,
+                select: function( event, ui ) {
+                    // console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+                    window.location.replace('http://localhost/books/' + ui.item.value );
+                }
+            });
+        } );
+    </script>
 
 @endsection
