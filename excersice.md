@@ -2,7 +2,7 @@
 
     - id autoincrement uniq
     - name varchar (100) not null
-    - sku varchar (20) not null
+    - sku varchar (20) not null uniq
     - description text null
     - price float default 0
     - quantity int 0
