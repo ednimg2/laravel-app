@@ -40,6 +40,12 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
+                            <strong>Email:</strong>
+                            <input type="text" name="email" value="{{ $blog->email }}" class="form-control" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
                             <strong>Description:</strong>
                             <textarea class="form-control" style="height:150px" name="description" placeholder="Description">{{ $blog->description }}</textarea>
                         </div>

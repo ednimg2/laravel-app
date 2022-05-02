@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -33,8 +34,11 @@ class BlogController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'title' => 'required',
-            'author' => 'required',
+            'title' => 'required|between:5,30',
+            'author' => 'required|min:2|max:20',
+            'email' => 'bail|required_if:author,mg|email',
+            'description' => 'max:200',
+            'is_active' => 'accepted_if:author,mg'
         ]);
 
         Blog::create($request->all());
@@ -55,20 +59,24 @@ class BlogController extends Controller
         return view('blogs.edit', compact('blog'));
     }
 
-    public function update(Request $request, $id): RedirectResponse
+    /*public function edit($slug): View
     {
-        $request->validate([
-            'title' => 'required',
-            'author' => 'required',
-        ]);
+        $blog = Blog::where('slug', $slug)->first();
+        return view('blogs.edit', compact('blog'));
+    }*/
 
+    public function update(BlogRequest $request, $id): RedirectResponse
+    {
+        //$validated = $request->validated();
         //$blog->update($request->all());
         $blog = Blog::find($id);
+        //$blog = Blog::where('slug', $slug);
 
         $blog->title = $request->title;
         $blog->author = $request->author;
         $blog->description = $request->description;
         $blog->is_active = (!empty($request->is_active)) ?? false;
+        $blog->slug = $request->slug;
 
         $blog->update();
 

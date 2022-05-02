@@ -28,24 +28,35 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Title:</strong>
-                            <input type="text" name="title" class="form-control" placeholder="Title">
+                            <input type="text" name="title" value="{{ old('title') }}" class="form-control @error('title') is-invalid @enderror" placeholder="Title">
+                            @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Author:</strong>
-                            <input type="text" name="author" class="form-control" placeholder="Author">
+                            <input type="text" name="author" value="{{ old('author') }}" class="form-control" placeholder="Author">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Email:</strong>
+                            <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Description:</strong>
-                            <textarea class="form-control" style="height:150px" name="description" placeholder="Description"></textarea>
+                            <textarea class="form-control" style="height:150px" name="description" placeholder="Description">{{ old('description') }}</textarea>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-check">
-                            <input type="checkbox" name="is_active" value="1" id="flexCheckChecked" class="form-check-input">
+                            <input type="checkbox" name="is_active" value="1" id="flexCheckChecked" class="form-check-input"
+                                @if (old('is_active'))
+                                   checked
+                                @endif
+                            >
                             <label class="form-check-label" for="flexCheckChecked">
                                 Active
                             </label>

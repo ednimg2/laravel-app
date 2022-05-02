@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('blogs/inactive', [BlogController::class, 'inactiveList']);
+//Route::get('/blogs/{slug}', [BlogController::class, 'edit']);
 
 Route::get('books/autocomplete', \App\Http\Controllers\BookAutocompleteController::class)->name('books.autocomplete');
 Route::get('books/{book}/download', \App\Http\Controllers\BookDownloadController::class)->name('books.download');

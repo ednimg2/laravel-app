@@ -23,6 +23,10 @@
         </div>
     @endif
 
+    @error('title')
+        <div class="alert alert-warning">{{ $message }}</div>
+    @enderror
+
     <form action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -31,7 +35,8 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Title:</strong>
-                    <input type="text" name="title" value="{{ $book->title }}" class="form-control" placeholder="Title">
+                    {{ old('title') }}
+                    <input type="text" name="title" value="{{ $book->title }}" class="form-control @error('title') is-invalid @enderror" placeholder="Title">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

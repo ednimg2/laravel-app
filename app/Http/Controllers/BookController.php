@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookPostRequest;
 use App\Models\Book;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -28,14 +29,16 @@ class BookController extends Controller
         return view('books.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(BookPostRequest $request): RedirectResponse
     {
-        $request->validate([
+        /*$request->validate([
             'title' => 'required',
             'description' => 'required',
-        ]);
+        ]);*/
 
-        Book::create($request->all());
+        $validated = $request->validated();
+
+        Book::create($validated);
 
         return redirect()->route('books.index')
             ->with('success','Book created successfully.');
@@ -67,8 +70,8 @@ class BookController extends Controller
         }
 
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|max:10',
+            'description' => 'required|max:50',
         ]);
 
         $book->update($request->all());
