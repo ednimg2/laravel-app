@@ -10,6 +10,27 @@
 
     <div class="row">
         <div class="col">
+            @if ($errors->has('title'))
+                <div class="alert alert-warning">
+                    {{ $errors->first('title') }}
+                    <ul>
+                    @foreach($errors->get('title') as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if ($errors->has('author'))
+                <div class="alert alert-primary">
+                    <ul>
+                        @foreach($errors->get('author') as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <strong>Whoops!</strong> There were some problems with your input.<br><br>

@@ -15,10 +15,10 @@ class BlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|between:5,30',
-            'author' => 'required|min:2|max:20',
+            'title' => 'required|between:5,100',
+            'author' => 'required|min:2|max:50',
             //'email' => 'bail|required_if:author,mg|email',
-            'description' => 'max:200',
+            'description' => 'max:500',
             //'is_active' => 'accepted_if:author,mg'
         ];
     }
@@ -26,7 +26,7 @@ class BlogRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'Title laukas yra privalomas',
+            'title.required' => ':attribute laukas yra privalomas',
             'title.between' => 'Simboliu kiekis turi buti nuo 5 iki 30',
         ];
     }
