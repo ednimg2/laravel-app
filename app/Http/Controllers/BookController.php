@@ -43,7 +43,7 @@ class BookController extends Controller
 
     public function show(Book $book): View
     {
-        return view('books.show');
+        return view('books.show', compact('book'));
     }
 
     public function edit(Book $book): View
