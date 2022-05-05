@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:' . User::ROLE_CONTENT_MANAGER);
+    }
+
     public function index(): View
     {
         $blogs = Blog::latest()->where('is_active', 1)->paginate(10);
@@ -25,7 +31,7 @@ class BlogController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
-    public function create(): View
+    public function create(Request $request): View
     {
         return view('blogs.create');
     }
