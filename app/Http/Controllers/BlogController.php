@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,6 +12,11 @@ use Illuminate\Support\Facades\Validator;
 
 class BlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:' . User::ROLE_CONTENT_MANAGER);
+    }
+
     public function index(Request $request): View
     {
         $blogs = Blog::latest()->where('is_active', 1)->paginate(10);

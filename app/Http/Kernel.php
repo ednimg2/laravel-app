@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\IpRestrictionMiddleware;
 use App\Http\Middleware\RequestLoggerMiddleware;
+use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\SimpleTokenMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -70,6 +71,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'request_logger' => RequestLoggerMiddleware::class,
         'ip_restriction' => IpRestrictionMiddleware::class,
-        SimpleTokenMiddleware::class
+        SimpleTokenMiddleware::class,
+        'role' => RoleMiddleware::class
     ];
 }
