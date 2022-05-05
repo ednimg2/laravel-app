@@ -11,12 +11,6 @@
         </div>
     </div>
 
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-
     <table class="table">
         <tr>
             <td>ID</td>
@@ -34,17 +28,10 @@
                 <td>{{ $blog->description }}</td>
                 <td>{{ $blog->is_active }}</td>
                 <td>
-                    <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <a href="{{ route('blogs.edit', $blog->id) }}" class="btn btn-warning">Edit</a>
-                        <a href="{{ url('blogs/add-to-wishlist', $blog->id) }}" class="btn btn-success">Add to wishlist</a>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                    <a href="{{ url('blogs/delete-wishlist', $blog->id) }}">Delete</a>
                 </td>
             </tr>
         @endforeach
     </table>
 
-    {{ $blogs->links() }}
 @endsection

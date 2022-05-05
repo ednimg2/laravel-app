@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -20,7 +21,9 @@ class BlogFactory extends Factory
             'title' => $this->faker->sentence(),
             'description' => $this->faker->text(400),
             'author' => sprintf('%s %s', $this->faker->firstName, $this->faker->lastName),
+            'email' => $this->faker->email(),
             'is_active' => $this->faker->boolean(),
+            'slug' => Str::slug($this->faker->sentence()),
         ];
     }
 }

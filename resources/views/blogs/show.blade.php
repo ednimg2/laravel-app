@@ -5,6 +5,7 @@
         <div class="col">
             <h1>Blog show</h1>
             <a href="{{ route('blogs.index') }}" class="btn btn-primary" title="Back">Back</a>
+            <a href="{{ url()->previous() }}" class="btn btn-warning">Back</a>
         </div>
     </div>
 
