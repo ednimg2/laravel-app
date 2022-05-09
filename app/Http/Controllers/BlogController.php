@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class BlogController extends Controller
@@ -19,7 +20,19 @@ class BlogController extends Controller
 
     public function index(Request $request): View
     {
-        $blogs = Blog::latest()->where('is_active', 1)->paginate(10);
+        //$blogs = Blog::latest()->where('is_active', 1)->paginate(10);
+
+        /*$blog = DB::update('update blogs set title = "Naujas title 3" where id = :id', [
+            'id' => 28
+        ]);*/
+
+        /*DB::delete('delete from blogs where id = :id', [
+            'id' => 35
+        ]);*/
+
+        $blogs = DB::select('select * from blogs where is_active = :active order by id desc', [
+            'active' => 1,
+        ]);
 
         $request->session()->reflash();
 
@@ -82,18 +95,18 @@ class BlogController extends Controller
             'is_active' => 'accepted_if:author,mg'
         ]);*/
 
-        $array = [
+        /*$array = [
             'user' => [
                 'name' => 333,
                 'email' => 'm.galvanauskas@gmail.com',
                 'admin' => true,
             ]
-        ];
+        ];*/
 
-        Validator::make($array, [
+        /*Validator::make($array, [
             'user' => 'array',
             'user.name' => 'string'
-        ])->validate();
+        ])->validate();*/
 
         /*Validator::make($request->all(), [
             'title' => 'numeric|min:5|max:30',
@@ -117,7 +130,20 @@ class BlogController extends Controller
                 ->withInput();
         }*/
 
-        Blog::create($request->all());
+        $request->validate([
+            'title' => 'required|between:2,15',
+            'description' => 'required|max:50',
+        ]);
+
+        DB::insert('insert into blogs (title, author, description, is_active, slug) values (?, ?, ?, ?, ?)', [
+            $request->title,
+            $request->author,
+            $request->description,
+            1,
+            'naujas-irasas',
+        ]);
+
+        //Blog::create($request->all());
 
         return redirect()->route('blogs.index')
             ->with('success', 'Blog created successfully');
