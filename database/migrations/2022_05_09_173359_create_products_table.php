@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('sku', 20);
             $table->text('description')->nullable();
             $table->float('price')->default(0.00);
-            $table->integer('quantity');
+            $table->integer('quantity')->default(0);
             $table->boolean('status')->default(0);
             $table->timestamps();
         });
