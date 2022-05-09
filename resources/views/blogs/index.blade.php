@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('components.column-1')
 
-@section('content')
+@section('body')
     <div class="row">
         <div class="col">
             <h1>Blogs</h1>

@@ -20,6 +20,8 @@ class BookController extends Controller
             '%' . $title . '%'
         )->latest()->paginate(5);
 
+        //$books = [];
+
         return view('books.index', compact('books'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
