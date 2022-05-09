@@ -30,6 +30,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('blogs.index') }}">Blog</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('country.index') }}">Countries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('orders.index') }}">Orders</a>
+                    </li>
                     @auth
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}">Logout</a>

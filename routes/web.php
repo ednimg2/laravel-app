@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\Shop\CountryController;
+use App\Http\Controllers\Shop\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,3 +54,6 @@ Route::post('password-reset', [\App\Http\Controllers\PasswordRemindController::c
 
 Route::get('password-reset/{email}/{token}', [\App\Http\Controllers\PasswordRemindController::class, 'changePassword'])->name('password_reminder.change');
 Route::post('password-reset/{email}/{token}', [\App\Http\Controllers\PasswordRemindController::class, 'submit'])->name('password_reminder.submit');
+
+Route::resource('country', CountryController::class);
+Route::resource('orders', OrderController::class);
