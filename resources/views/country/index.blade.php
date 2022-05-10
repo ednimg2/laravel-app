@@ -5,7 +5,6 @@
     <tr>
         <td>Name</td>
         <td>ISO2</td>
-        <td>ISO3</td>
         <td>Active</td>
         <td>-</td>
     </tr>
@@ -13,7 +12,6 @@
         <tr>
             <td>{{ $country->name }}</td>
             <td>{{ $country->iso_code_2 }}</td>
-            <td>{{ $country->iso_code_3 }}</td>
             <td>{{ $country->active }}</td>
             <td></td>
         </tr>
