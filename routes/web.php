@@ -55,5 +55,9 @@ Route::post('password-reset', [\App\Http\Controllers\PasswordRemindController::c
 Route::get('password-reset/{email}/{token}', [\App\Http\Controllers\PasswordRemindController::class, 'changePassword'])->name('password_reminder.change');
 Route::post('password-reset/{email}/{token}', [\App\Http\Controllers\PasswordRemindController::class, 'submit'])->name('password_reminder.submit');
 
+Route::get('orders/distinct_payment', [OrderController::class, 'distinctPayment']);
+Route::get('orders/order_count_by_delivery_type', [OrderController::class, 'ordersCountByDeliveryType']);
+Route::get('orders/order_count_by_delivery_type_having', [OrderController::class, 'ordersCountByDeliveryTypeHaving']);
+Route::get('orders/products_data', [OrderController::class, 'productData']);
 Route::resource('country', CountryController::class);
 Route::resource('orders', OrderController::class);
