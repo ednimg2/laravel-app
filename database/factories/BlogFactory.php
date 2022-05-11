@@ -20,7 +20,6 @@ class BlogFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'description' => $this->faker->text(400),
-            'author' => sprintf('%s %s', $this->faker->firstName, $this->faker->lastName),
             'email' => $this->faker->email(),
             'is_active' => $this->faker->boolean(),
             'slug' => Str::slug($this->faker->sentence()),
