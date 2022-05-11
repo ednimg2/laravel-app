@@ -1,0 +1,30 @@
+One to one relationship
+
+1. Blogui pridėsim award(įvertinimas)
+Step:
+    //Pasikuriam Award lentele
+    //Pasikuriam migracija Award lentelei
+    //Sukuriamas modelis
+    //Sukursime rysi
+    //Seederi, kuris mums leis uzsideti tuos duomenis.
+
+
+One to many:
+
+2. Step:
+    // author salinam is blog
+    // foreign key author_id jis rodys i user table
+    // databse seeder
+    // isvisesim paskui duomenis
+
+
+many to many
+
+3. // sukurti leneteles role; user_role
+   // prisideti i user_role foreign key
+   // pasikurti modeli role
+   // pasirasysim seederis , pakurs Role_user, Role_admin, Role_manager
+   // Controleryje issivesim duomenis kokios roles priklauso vartotojui.
+
+N+1 problemos sprendimas su with
+

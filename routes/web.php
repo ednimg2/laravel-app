@@ -57,3 +57,7 @@ Route::post('password-reset/{email}/{token}', [\App\Http\Controllers\PasswordRem
 
 Route::resource('country', CountryController::class);
 Route::resource('orders', OrderController::class);
+
+Route::get('awards', [\App\Http\Controllers\AwardController::class, 'index'])->name('award.index');
+Route::get('user-blogs', [\App\Http\Controllers\AwardController::class, 'userBlogs'])->name('award.user_blogs');
+Route::get('user-roles', [\App\Http\Controllers\AwardController::class, 'userRoles'])->name('award.user_roles');

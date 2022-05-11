@@ -38,6 +38,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $with = [
+        'roles'
+    ];
+
     /**
      * The attributes that should be cast.
      *
@@ -46,4 +50,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class, 'author_id');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_role');
+    }
+
+    public function awards()
+    {
+        //select userid -> select from blogs where user_id = {user_id} => select from awards where blog_id = {blog_id}
+        return $this->hasManyThrough(Award::class, Blog::class, 'author_id');
+    }
 }
