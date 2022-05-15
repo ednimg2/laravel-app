@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\Traits\CommentableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class BlogComment extends Model
 {
     use HasFactory;
-    use CommentableTrait;
 
-    protected $fillable = ['title', 'description'];
+    public function blog()
+    {
+        return $this->belongsTo(Blog::class);
+    }
 }

@@ -6,10 +6,14 @@ use App\Models\Traits\CommentableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Award extends Model
 {
-    use HasFactory;
     use CommentableTrait;
+    use HasFactory;
 
-    protected $fillable = ['title', 'description'];
+    protected $table = 'award';
+
+    public function blog() {
+        return $this->belongsTo(Blog::class);
+    }
 }
