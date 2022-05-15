@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BlogRequest;
+use App\Models\Audit;
 use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
@@ -15,7 +16,7 @@ class BlogController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:' . User::ROLE_CONTENT_MANAGER);
+//        $this->middleware('role:' . User::ROLE_CONTENT_MANAGER);
     }
 
     public function index(Request $request): View
@@ -30,9 +31,11 @@ class BlogController extends Controller
             'id' => 35
         ]);*/
 
-        $blogs = DB::select('select * from blogs where is_active = :active order by id desc', [
-            'active' => 1,
-        ]);
+        $blogs = Blog::where('is_active', '=', 1)->get();
+
+//            DB::select('select * from blogs where is_active = :active order by id desc', [
+//            'active' => 1,
+//        ]);
 
         $request->session()->reflash();
 
@@ -153,6 +156,8 @@ class BlogController extends Controller
     {
         //$blog = Blog::find($id);
 
+        var_dump($blog->audits->count());
+
         return view('blogs.show', compact('blog'));
     }
 
@@ -175,11 +180,25 @@ class BlogController extends Controller
         //$blog = Blog::where('slug', $slug);
 
         $blog->title = $request->title;
-        $blog->author = $request->author;
+//        $blog->author = $request->author;
         $blog->description = $request->description;
-        $blog->is_active = (!empty($request->is_active)) ?? false;
+        $blog->is_active = (!empty($request->is_active)) ? 1 : 0;
         $blog->slug = $request->slug;
         $blog->update();
+
+        $changes = [];
+        foreach ($blog->getOriginal() as $key => $value) {
+            if ($blog->wasChanged([$key]) && $key != 'updated_at') {
+                $changes[$key] = $blog->{$key};
+            }
+        }
+
+        $audit = new Audit();
+        $audit->blog()->associate($blog);
+        $audit->context = json_encode($changes);
+        $audit->save();
+
+//        die();
 
         $request->session()->flash('warning', 'Flash data message');
 

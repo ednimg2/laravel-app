@@ -4,6 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\Award;
 use App\Models\Blog;
+use App\Models\BlogComment;
+use App\Models\Book;
+use App\Models\BookComment;
+use App\Models\Comment;
+use App\Models\Order;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -74,7 +79,7 @@ class DatabaseSeeder extends Seeder
 
         //Many to many
         $roleAdmins = Role::factory(1)->create(['name' => 'ROLE_ADMIN']);
-        $roleManager = Role::factory(1)->create(['name' => 'ROLE_MANAGER']);
+        $roleManager = Role::factory(1)->create(['name' => 'ROLE_MANAGER', 'active' => 0]);
         $roleUser = Role::factory(1)->create(['name' => 'ROLE_USER']);
 
         $admin->roles()->attach($roleAdmins->first());
@@ -96,5 +101,37 @@ class DatabaseSeeder extends Seeder
         $user = $users->first();
         $user->roles()->attach($roleAdmins->first());
         $user->save();
+
+        //Coments
+        $comment1 = new Comment();
+        $comment1->text = 'testing';
+        $comment1->rating = 5;
+        $comment1->author = 'Author';
+        $comment1->commentable()->associate($blog);
+        $comment1->save();
+
+
+        $books = Book::factory(1)->create();
+        $book = $books->first();
+
+
+        $comment2 = new Comment();
+        $comment2->text = "book comment";
+        $comment2->rating = 4;
+        $comment2->author = "Author boook";
+        $comment2->commentable()->associate($book);
+        $comment2->save();
+
+
+        $orders = Order::factory(1)->create();
+        $order = $orders->first();
+
+
+        $comment2 = new Comment();
+        $comment2->text = "order comment";
+        $comment2->rating = 4;
+        $comment2->author = "Author order";
+        $comment2->commentable()->associate($order);
+        $comment2->save();
     }
 }

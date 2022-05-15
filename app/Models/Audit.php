@@ -2,18 +2,24 @@
 
 namespace App\Models;
 
-use App\Models\Traits\CommentableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Award extends Model
+class Audit extends Model
 {
-    use CommentableTrait;
     use HasFactory;
 
-    protected $table = 'award';
+    //sarysio i bloga
 
-    public function blog() {
+    //sarysio i user
+
+    public function blog()
+    {
         return $this->belongsTo(Blog::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

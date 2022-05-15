@@ -30,7 +30,7 @@
             <tr>
                 <td>{{ $blog->id }}</td>
                 <td><a href="{{ route('blogs.show', $blog->id) }}">{{ $blog->title }}</a></td>
-                <td>{{ $blog->author }}</td>
+                <td></td>
                 <td>{{ $blog->description }}</td>
                 <td>{{ $blog->is_active }}</td>
                 <td>

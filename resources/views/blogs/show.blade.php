@@ -16,4 +16,20 @@
             <p>{{ $blog->description }}</p>
         </div>
     </div>
+
+    <hr>
+    <h3>Audit logs</h3>
+    <table>
+        <tr>
+            <th style="width: 200px">Date</th>
+            <th>Changes</th>
+        </tr>
+        @foreach($blog->audits as $audit)
+            <tr>
+                <td>{{ $audit->created_at }}</td>
+                <td>{{ $audit->context }}</td>
+            </tr>
+        @endforeach
+    </table>
+    <hr>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Award;
 use App\Models\Blog;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -78,6 +79,21 @@ class AwardController extends Controller
                     var_dump($award->name);
                 }
             }
+        }
+    }
+
+    public function comments()
+    {
+        $blog = Blog::find(6);
+        echo 'Blog comment:';
+        foreach ($blog->comments as $comment) {
+            echo $comment->text . '</br>';
+        }
+
+        $order = Order::find(1);
+        echo 'Order comment:';
+        foreach ($order->comments as $comment) {
+            echo $comment->text . '</br>';
         }
     }
 }
