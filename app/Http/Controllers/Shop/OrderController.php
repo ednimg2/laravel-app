@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderData;
+use App\Models\Order;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class OrderController extends Controller
 {
@@ -33,8 +38,17 @@ class OrderController extends Controller
         //dd($orders->toSql());
 
         return view('shop.orders.index', [
-            'orders' => $orders->get()
+            'orders' => $orders->get(),
+            'img' => Storage::url('file1.jpg')
         ]);
+    }
+
+    public function sendOrderDataViaEmail(Order $order): RedirectResponse
+    {
+        Mail::to($order->email)->send(new OrderData($order));
+
+        return redirect('orders')
+            ->with('success', 'Email send successfully!');
     }
 
     public function distinctPayment()

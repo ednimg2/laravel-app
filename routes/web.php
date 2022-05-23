@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\Shop\CountryController;
 use App\Http\Controllers\Shop\OrderController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,39 @@ Route::get('books/export', \App\Http\Controllers\BookExportController::class)->n
 Route::post('cookies', \App\Http\Controllers\CookieController::class)->name('cookies');
 Route::resource('books', BookController::class);
 Route::resource('blogs', BlogController::class);
+
+Route::get('collection/collect', [CollectionController::class, 'collect']);
+Route::get('collection/extending-collection', [CollectionController::class, 'extendingCollection']);
+Route::get('collection/all', [CollectionController::class, 'collectionAll']);
+Route::get('collection/avg', [CollectionController::class, 'collectionAvg']);
+Route::get('collection/chunk', [CollectionController::class, 'collectionChunk']);
+Route::get('collection/chunk-view', [CollectionController::class, 'collectionChunkView']);
+Route::get('collection/collapse', [CollectionController::class, 'collectionCollapse']);
+Route::get('collection/combine', [CollectionController::class, 'collectionCombine']);
+Route::get('collection/concat', [CollectionController::class, 'collectionConcat']);
+Route::get('collection/contains', [CollectionController::class, 'collectionContains']);
+Route::get('collection/contains-2', [CollectionController::class, 'collectionContains2']);
+Route::get('collection/count', [CollectionController::class, 'collectionCount']);
+Route::get('collection/count-by', [CollectionController::class, 'collectionCountBy']);
+Route::get('collection/count-by-2', [CollectionController::class, 'collectionCountBy2']);
+Route::get('collection/cross-join', [CollectionController::class, 'collectionCrossJoin']);
+Route::get('collection/cross-join-2', [CollectionController::class, 'collectionCrossJoin2']);
+Route::get('collection/diff', [CollectionController::class, 'collectionDiff']);
+Route::get('collection/diff-assoc', [CollectionController::class, 'collectionDiffAsoc']);
+Route::get('collection/diff-keys', [CollectionController::class, 'collectionDiffKeys']);
+Route::get('collection/doesnt-contains', [CollectionController::class, 'collectionDoesntContains']);
+Route::get('collection/duplicates', [CollectionController::class, 'collectionDuplicates']);
+Route::get('collection/each', [CollectionController::class, 'collectionEach']);
+Route::get('collection/except', [CollectionController::class, 'collectionExcept']);
+Route::get('collection/filter', [CollectionController::class, 'collectionFilter']);
+Route::get('collection/filter-products', [CollectionController::class, 'collectionFilterProducts']);
+Route::get('collection/first', [CollectionController::class, 'collectionFirst']);
+Route::get('collection/forget', [CollectionController::class, 'collectionForget']);
+Route::get('collection/get', [CollectionController::class, 'collectionGet']);
+Route::get('collection/has', [CollectionController::class, 'collectionHas']);
+Route::get('collection/implode', [CollectionController::class, 'collectionImplode']);
+Route::get('collection/intersect', [CollectionController::class, 'collectionIntersect']);
+Route::get('collection/intersect-key', [CollectionController::class, 'collectionIntersectKey']);
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [\App\Http\Controllers\AuthController::class, 'show'])->name('login');
@@ -78,6 +112,7 @@ Route::get('orders/exercise9', [OrderController::class, 'exercise9']);
 Route::get('orders/products_data', [OrderController::class, 'productData']);
 Route::resource('country', CountryController::class);
 Route::resource('orders', OrderController::class);
+Route::get('orders/send-email/{order}', [OrderController::class, 'sendOrderDataViaEmail']);
 
 Route::get('awards', [\App\Http\Controllers\AwardController::class, 'index'])->name('award.index');
 Route::get('user-blogs', [\App\Http\Controllers\AwardController::class, 'userBlogs'])->name('award.user_blogs');
@@ -85,3 +120,4 @@ Route::get('user-roles', [\App\Http\Controllers\AwardController::class, 'userRol
 Route::get('comments', [\App\Http\Controllers\AwardController::class, 'comments']);
 
 Route::get('users/roles', [\App\Http\Controllers\UserRoleController::class, 'index']);
+

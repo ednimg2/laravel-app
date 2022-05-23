@@ -1,6 +1,12 @@
 @extends('layout')
 
 @section('content')
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+
     <table class="table">
         <tr>
             <td>Order ID</td>
@@ -25,7 +31,9 @@
                 <td>{{ $order->payment_method }}</td>
                 <td>{{ $order->country_name }}</td>
                 <td>{{ $order->created_at }}</td>
-                <td></td>
+                <td>
+                    <a href="{{ url('orders/send-email', $order->id) }}" class="btn btn-primary">Send email</a>
+                </td>
             </tr>
         @empty
             <tr>
