@@ -113,6 +113,8 @@ Route::get('orders/products_data', [OrderController::class, 'productData']);
 Route::resource('country', CountryController::class);
 Route::resource('orders', OrderController::class);
 Route::get('orders/send-email/{order}', [OrderController::class, 'sendOrderDataViaEmail']);
+Route::get('orders/send-order-shipped-email/{order}', [OrderController::class, 'sendOrderShippedEmail']);
+Route::get('orders/send-order-status/{order}', [OrderController::class, 'sendOrderStatus']);
 
 Route::get('awards', [\App\Http\Controllers\AwardController::class, 'index'])->name('award.index');
 Route::get('user-blogs', [\App\Http\Controllers\AwardController::class, 'userBlogs'])->name('award.user_blogs');

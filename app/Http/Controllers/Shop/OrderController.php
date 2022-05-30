@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
 use App\Mail\OrderData;
+use App\Mail\OrderShipped;
+use App\Mail\OrderStatus;
 use App\Models\Order;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -46,6 +48,31 @@ class OrderController extends Controller
     public function sendOrderDataViaEmail(Order $order): RedirectResponse
     {
         Mail::to($order->email)->send(new OrderData($order));
+
+        return redirect('orders')
+            ->with('success', 'Email send successfully!');
+    }
+
+    public function sendOrderShippedEmail(Order $order): RedirectResponse
+    {
+        $message = (new OrderShipped($order, url('book/show', $order->id)))->onQueue('order');
+
+        Mail::to($order->email)->later(
+            now()->addSeconds(5),
+            $message
+        );
+
+        return redirect('orders')
+            ->with('success', 'Email send successfully!');
+    }
+
+    public function sendOrderStatus(Order $order): RedirectResponse
+    {
+        //$message = (new OrderStatus($order, 'Mindaugas'))->onQueue('email');
+
+        //Mail::queue($message);
+
+        Mail::send(new OrderStatus($order, 'Mindaugas'));
 
         return redirect('orders')
             ->with('success', 'Email send successfully!');

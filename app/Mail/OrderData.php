@@ -29,7 +29,9 @@ class OrderData extends Mailable
                 'order' => $this->order,
                 'first_name' => $this->order->first_name,
             ])
-            //->attach(Storage::path('file1.jpg'))
+            ->attach(Storage::path('file1.jpg'), [
+                'as' => 'file_new.jpg',
+            ])
             ->subject('Order Id: '. $this->order->id)
             ->tag('order')
         ;
