@@ -33,6 +33,8 @@
                 <td>{{ $order->created_at }}</td>
                 <td>
                     <a href="{{ url('orders/send-email', $order->id) }}" class="btn btn-primary">Send email</a>
+                    <a href="{{ url('orders/send-order-shipped-email', $order->id) }}" class="btn btn-success">Shipped</a>
+                    <a href="{{ url('orders/send-order-status', $order->id) }}" class="btn btn-danger">Status</a>
                 </td>
             </tr>
         @empty
