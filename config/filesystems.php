@@ -44,6 +44,14 @@ return [
             'throw' => false,
         ],
 
+        'public_files' => [
+            'driver' => 'local',
+            'root' => storage_path('app/files'),
+            'url' => env('APP_URL').'/files',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -55,6 +63,19 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
+
+        'digitalocean' => [
+            'driver' => 's3',
+            'key' => env('DIGITALOCEAN_SPACES_KEY'),
+            'secret' => env('DIGITALOCEAN_SPACES_SECRET'),
+            'region' => env('DIGITALOCEAN_SPACES_REGION'),
+            'bucket' => env('DIGITALOCEAN_SPACES_BUCKET'),
+            'endpoint' => env('DIGITALOCEAN_SPACES_ENDPOINT'),
+            'url' => env('DIGITALOCEAN_SPACES_URL'),
+            'bucket_endpoint' => true,
+            'visibility' => 'public',
+            'throw' => false,
+        ]
 
     ],
 

@@ -31,7 +31,7 @@
                 <td>{{ $blog->id }}</td>
                 <td><a href="{{ route('blogs.show', $blog->id) }}">{{ $blog->title }}</a></td>
                 <td></td>
-                <td>{{ $blog->description }}</td>
+                <td>{{ Str::limit($blog->description, 100) }}</td>
                 <td>{{ $blog->is_active }}</td>
                 <td>
                     <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST">

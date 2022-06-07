@@ -3,6 +3,9 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\HelperController;
+use App\Http\Controllers\S3Controller;
 use App\Http\Controllers\Shop\CountryController;
 use App\Http\Controllers\Shop\OrderController;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +71,12 @@ Route::get('collection/implode', [CollectionController::class, 'collectionImplod
 Route::get('collection/intersect', [CollectionController::class, 'collectionIntersect']);
 Route::get('collection/intersect-key', [CollectionController::class, 'collectionIntersectKey']);
 
+Route::get('helper/array', [HelperController::class, 'arrayHelper']);
+Route::get('helper/path', [HelperController::class, 'pathHelper']);
+Route::get('helper/strings', [HelperController::class, 'stringsHelper']);
+Route::get('helper/urls', [HelperController::class, 'urlsHelper'])->name('app.helper.urls');
+Route::get('helper/others', [HelperController::class, 'othersHelper']);
+
 Route::middleware('guest')->group(function () {
     Route::get('login', [\App\Http\Controllers\AuthController::class, 'show'])->name('login');
     Route::post('login', [\App\Http\Controllers\AuthController::class, 'auth'])->name('auth');
@@ -122,4 +131,20 @@ Route::get('user-roles', [\App\Http\Controllers\AwardController::class, 'userRol
 Route::get('comments', [\App\Http\Controllers\AwardController::class, 'comments']);
 
 Route::get('users/roles', [\App\Http\Controllers\UserRoleController::class, 'index']);
+
+Route::get('file/put', [FileController::class, 'createFileWithPut']);
+Route::get('file/get', [FileController::class, 'getFileContent']);
+Route::get('file/download', [FileController::class, 'downloadFile']);
+Route::get('file/meta', [FileController::class, 'getMeta']);
+Route::get('file/prepend_append', [FileController::class, 'prependAppendFile']);
+Route::get('file/copy_move', [FileController::class, 'copyMoveFile']);
+Route::get('file/save_uniq_id', [FileController::class, 'saveWithUniqId']);
+Route::get('file/delete', [FileController::class, 'deleteFile']);
+Route::get('file/files_directories', [FileController::class, 'getFilesAndDirectories']);
+
+Route::get('file/s3/put', [S3Controller::class, 'createFileWithPut']);
+Route::get('file/s3/get', [S3Controller::class, 'getFileContent']);
+Route::get('file/s3/download', [S3Controller::class, 'downloadFile']);
+Route::get('file/s3/temporary_url', [S3Controller::class, 'temporaryUrl']);
+Route::get('file/s3/visibility_file', [S3Controller::class, 'visibilityFile']);
 

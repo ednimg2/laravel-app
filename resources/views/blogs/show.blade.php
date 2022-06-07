@@ -9,6 +9,9 @@
         </div>
     </div>
 
+    <img src="{{ asset('assets/images/photo.jpg') }}">
+    <a href="{{ url('helper/urls') }}">Helpers url</a>
+
     <div class="row">
         <div class="col">
             <h3>{{ $blog->title }}</h3>
@@ -21,7 +24,7 @@
     <h3>Audit logs</h3>
     <table>
         <tr>
-            <th style="width: 200px">Date</th>
+            <th style="width: 200px">{{ __('Date') }}</th>
             <th>Changes</th>
         </tr>
         @foreach($blog->audits as $audit)
